@@ -1,3 +1,9 @@
+05/03/2020 -------------------
+(SERVER)
+- instalado y creado script para nodemon
+- habilitado los CORS
+- instalado el middleware bodyparser
+
 04/03/2020 -------------------
 - inicio del log.
 - se separo el proyecto en dos: uno para el front y otro para el back
