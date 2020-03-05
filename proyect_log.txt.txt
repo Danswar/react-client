@@ -3,6 +3,7 @@
 - instalado y creado script para nodemon
 - habilitado los CORS
 - instalado el middleware bodyparser
+- configuracion de DB mongo y instalacion de mongoose
 
 04/03/2020 -------------------
 - inicio del log.
