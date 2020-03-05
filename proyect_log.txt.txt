@@ -1,0 +1,4 @@
+04/03/2020 -------------------
+- inicio del log.
+- se separo el proyecto en dos: uno para el front y otro para el back
+- configuracion inicial de un servidor con express
