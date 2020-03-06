@@ -3,6 +3,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
+const passport = require("passport");
+const passportConfig = require("./config/passport");
+
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 
@@ -14,6 +17,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"));
+
+//Passport
+const { localStrategy, serializeUser, deserializeUser } = passportConfig;
+passport.use(localStrategy);
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
 
 //DB Connection
 mongoose

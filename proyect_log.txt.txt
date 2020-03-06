@@ -1,8 +1,14 @@
+07/03/2020 -------------------
+(SERVER)
+- instalado passport para manejar autenticacion
+- configurada la estrategia local de autenticacion para passport
+- implementada la ruta para login de usuarios con email y contraseña
+- el signin y signup devuelven token jwt
+
 06/03/2020 -------------------
 (SERVER)
 - definido el modelo user
 - definida ruta para registro de usuarios por nombre-usuario/email/contraseña
-
 
 05/03/2020 -------------------
 (SERVER)

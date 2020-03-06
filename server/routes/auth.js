@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 const JWT = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config/keys");
@@ -32,6 +33,7 @@ router.post("/signup", async (req, res) => {
 
     const savedUser = await newUser.save();
 
+    //TODO: crear funcion para firmar tokens
     //Send the response
     const token = JWT.sign({ id: savedUser._id }, JWT_SECRET, {
       expiresIn: 3600
@@ -48,5 +50,25 @@ router.post("/signup", async (req, res) => {
     res.status(400).json({ msg: e.message });
   }
 });
+
+//TODO: mover el middleware a otro lugar
+//TODO: crear funcion para firmar tokens
+router.post(
+  "/signin",
+  passport.authenticate("local", { session: false }),
+  async (req, res) => {
+    const token = await JWT.sign({ id: req.user._id }, JWT_SECRET, {
+      expiresIn: 3600
+    });
+
+    res.status(200).json({
+      token,
+      user: {
+        username: req.user.username,
+        email: req.user.email
+      }
+    });
+  }
+);
 
 module.exports = router;
