@@ -6,6 +6,8 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 
+const authRouter = require("./routes/auth");
+
 const app = express();
 
 //Middlewares
@@ -21,13 +23,7 @@ mongoose
 
 //Routes
 app.options("*", cors()); //Allow prefligth request
-
-const router = express.Router();
-router.get("/", (req, res) => {
-  console.log("router1");
-  res.status(200).json({ msg: "Hola mundo" });
-});
-app.use(router);
+app.use(authRouter);
 
 //Start
 const PORT = process.env.PORT || 3000;

@@ -1,3 +1,9 @@
+06/03/2020 -------------------
+(SERVER)
+- definido el modelo user
+- definida ruta para registro de usuarios por nombre-usuario/email/contraseña
+
+
 05/03/2020 -------------------
 (SERVER)
 - instalado y creado script para nodemon
