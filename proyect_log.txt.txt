@@ -1,5 +1,11 @@
 07/03/2020 -------------------
 (SERVER)
+- implementada la estrategia JWT. Importante: se debe incluir en el Request el header: 'Authoritation: JWT {token}'
+- implementada ruta '/profile' , es una ruta segura que devuelve el usuario identificado con el token enviado
+
+
+07/03/2020 -------------------
+(SERVER)
 - instalado passport para manejar autenticacion
 - configurada la estrategia local de autenticacion para passport
 - implementada la ruta para login de usuarios con email y contraseña

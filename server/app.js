@@ -19,10 +19,18 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 //Passport
-const { localStrategy, serializeUser, deserializeUser } = passportConfig;
+const {
+  localStrategy,
+  jwtStrategy,
+  serializeUser,
+  deserializeUser
+} = passportConfig;
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
+
+app.use(passport.initialize());
 
 //DB Connection
 mongoose
