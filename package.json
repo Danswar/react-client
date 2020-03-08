@@ -1,0 +1,30 @@
+{
+  "name": "web-app-template",
+  "version": "1.0.0",
+  "description": "client and server boilerplate to construct modern apps",
+  "main": "index.js",
+  "scripts": {
+    "dev-server": "npx nodemon app.js --prefix server",
+    "dev-client": "npm start --prefix client",
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Danswar/web-app-template.git"
+  },
+  "keywords": [
+    "reactjs",
+    "expressjs",
+    "jwt",
+    "passport"
+  ],
+  "author": "Daniel Padrino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Danswar/web-app-template/issues"
+  },
+  "homepage": "https://github.com/Danswar/web-app-template#readme",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
