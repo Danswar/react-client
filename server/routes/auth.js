@@ -1,17 +1,20 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
-const passport = require("passport");
 
-const JWT = require("jsonwebtoken");
-const { JWT_SECRET } = require("../config/keys");
+const { authLocal, authJWT } = require("../middlewares");
+const signToken = require("../config/signToken");
 
 const User = require("../models/user");
 
+/**
+ * @route   POST api/signup
+ * @desc    register a new user
+ * @access  Public
+ */
 router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
 
   //TODO: fields validation
-
   try {
     //Check for existing user
     const user = await User.findOne({ email });
@@ -19,64 +22,41 @@ router.post("/signup", async (req, res) => {
 
     //Password encrypt
     const salt = await bcrypt.genSalt(10);
-    if (!salt) throw Error("Something went wrong with bcrypt");
-
     const hashPassword = await bcrypt.hash(password, salt);
-    if (!hashPassword) throw Error("Something went wrong hashing the password");
 
     //Persist the user
-    const newUser = new User({
+    const savedUser = await new User({
       username,
       email,
       password: hashPassword
-    });
+    }).save();
 
-    const savedUser = await newUser.save();
-
-    //TODO: crear funcion para firmar tokens
     //Send the response
-    const token = JWT.sign({ id: savedUser._id }, JWT_SECRET, {
-      expiresIn: 3600
-    });
-
-    res.status(200).json({
-      token,
-      user: {
-        username: savedUser.username,
-        email: savedUser.email
-      }
-    });
+    const token = await signToken(savedUser);
+    res.status(200).json({ token });
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
 });
 
-//TODO: mover el middleware a otro lugar
-//TODO: crear funcion para firmar tokens
-router.post(
-  "/signin",
-  passport.authenticate("local", { session: false }),
-  async (req, res) => {
-    const token = await JWT.sign({ id: req.user._id }, JWT_SECRET, {
-      expiresIn: 3600
-    });
+/**
+ * @route   POST api/signin
+ * @desc    return token to user already registered
+ * @access  Public
+ */
+router.post("/signin", authLocal, async (req, res) => {
+  const token = await signToken(req.user);
 
-    res.status(200).json({
-      token,
-      user: {
-        username: req.user.username,
-        email: req.user.email
-      }
-    });
-  }
-);
+  res.status(200).json({ token });
+});
 
-router.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    res.status(200).json(req.user);
-  }
-);
+/**
+ * @route   GET api/profile
+ * @desc    Get information to token owner
+ * @access  Private
+ */
+router.get("/profile", authJWT, async (req, res) => {
+  res.status(200).json(req.user);
+});
 
 module.exports = router;

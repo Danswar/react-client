@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
 const passport = require("passport");
-const passportConfig = require("./config/passport");
+const applyPassportConfig = require("./config/passport");
 
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
@@ -18,23 +18,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
-//Passport
-const {
-  localStrategy,
-  jwtStrategy,
-  serializeUser,
-  deserializeUser
-} = passportConfig;
-passport.use(localStrategy);
-passport.use(jwtStrategy);
-passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializeUser);
-
-app.use(passport.initialize());
+//Passport config
+applyPassportConfig(passport);
 
 //DB Connection
 mongoose
-  .connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(keys.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
   .then(() => console.log("DB connect..."))
   .catch(err => console.log(err));
 

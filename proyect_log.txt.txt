@@ -1,8 +1,13 @@
+08/03/2020 -------------------
+(SERVER)
+- refactor a la cofiguracion de passport
+- refactor a los middlewares
+- refactor de firma de tokens
+
 07/03/2020 -------------------
 (SERVER)
 - implementada la estrategia JWT. Importante: se debe incluir en el Request el header: 'Authoritation: JWT {token}'
 - implementada ruta '/profile' , es una ruta segura que devuelve el usuario identificado con el token enviado
-
 
 07/03/2020 -------------------
 (SERVER)
