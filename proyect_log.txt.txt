@@ -3,6 +3,9 @@
 - refactor a la cofiguracion de passport
 - refactor a los middlewares
 - refactor de firma de tokens
+(CLIENT)
+- implementada funcionalidad para hacer Api Request (Redux middleware)
+- implementada funcionalidad para hacer log (Redux middleware)
 
 07/03/2020 -------------------
 (SERVER)
