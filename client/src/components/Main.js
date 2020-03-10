@@ -1,13 +1,12 @@
-import React from 'react';
-import Home from "./Home";
+import React from "react";
+import Signin from "./Signin";
 
 function Main() {
-
   return (
     <div>
-      <Home/>
+      <Signin />
     </div>
   );
 }
 
-export default Home;
+export default Main;

@@ -39,6 +39,9 @@ const dispatchAll = (dispatcher, actions, data) => {
       case "object":
         dispatcher(actions);
         break;
+
+      default:
+        break;
     }
   } catch (error) {
     console.log(error);

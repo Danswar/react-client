@@ -12,7 +12,7 @@ function Home() {
     dispatch(
       apiRequest(null, "GET", "http://localhost:5000/profile", log, log)
     );
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
