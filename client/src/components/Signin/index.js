@@ -1,21 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { signinRequest } from "../../store/actions/authAction";
+
 import SigninForm from "./signinForm";
 
-class Signin extends Component {
-  onSubmit = (email, password) => {
-    console.log("credentials: ", email, password);
+const Signin = () => {
+  const dispatch = useDispatch();
+
+  const onSubmit = (email, password) => {
+    dispatch(signinRequest(email, password));
   };
 
-  render() {
-    return (
-      <div>
-        <SigninForm
-          onSubmit={this.onSubmit}
-          imgSrc="https://via.placeholder.com/330"
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <SigninForm
+        onSubmit={onSubmit}
+        imgSrc="https://via.placeholder.com/330"
+      />
+    </div>
+  );
+};
 
 export default Signin;

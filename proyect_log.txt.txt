@@ -2,6 +2,7 @@
 (CLIENT)
 - componentes signin con estilos de boostrap
 - revision de warning 
+- implementada funcionalidad para signin en la store
 
 08/03/2020 -------------------
 (SERVER)

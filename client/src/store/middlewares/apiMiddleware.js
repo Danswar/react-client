@@ -12,6 +12,7 @@ const apiMiddleware = ({ dispatch }) => next => action => {
     axios({
       url,
       method,
+      headers: { "Content-Type": "application/json" },
       data: JSON.stringify(body)
     })
       .then(data => dispatchAll(dispatch, onSuccess, data))
