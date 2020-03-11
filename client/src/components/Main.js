@@ -5,7 +5,7 @@ import Boot from "./Boot";
 import Signin from "./Signin";
 import Dashboard from "./Dashboard";
 import NoMatch from "./NoMatch";
-import ProtectedRoutes from "./HOCs/protectedRoutes";
+import ProtectedRoute from "./HOCs/protectedRoute";
 
 function Main() {
   return (
@@ -16,9 +16,7 @@ function Main() {
         <Route path="/signin" exact={true} component={Signin} />
 
         {/* Private routes */}
-        <ProtectedRoutes>
-          <Route path="/dashboard" exact={true} component={Dashboard} />
-        </ProtectedRoutes>
+        <ProtectedRoute path="/dashboard" exact={true} component={Dashboard} />
 
         {/* Default route*/}
         <Route path="*" component={NoMatch} />
