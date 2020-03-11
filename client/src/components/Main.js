@@ -1,10 +1,10 @@
 import React from "react";
-import Signin from "./Signin";
+import Dashboard from "./Dashboard";
 
 function Main() {
   return (
     <div>
-      <Signin />
+      <Dashboard />
     </div>
   );
 }
