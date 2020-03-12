@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { signinRequest } from "../../store/actions/authAction";
+import withCheckAuth from "../HOCs/withCheckAuth";
 
 import SigninForm from "./signinForm";
 
@@ -21,4 +22,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default withCheckAuth(Signin);

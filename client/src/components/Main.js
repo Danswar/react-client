@@ -5,7 +5,7 @@ import Boot from "./Boot";
 import Signin from "./Signin";
 import Dashboard from "./Dashboard";
 import NoMatch from "./NoMatch";
-import ProtectedRoute from "./HOCs/protectedRoute";
+import ProtectedRoute from "./HOCs/ProtectedRoute";
 
 function Main() {
   return (
