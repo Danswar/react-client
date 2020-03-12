@@ -15,7 +15,7 @@ const withCheckAuth = WrappedComponent => {
       if (!isLoading && booted) {
         isAuth ? history.push("/dashboard") : history.push("/signin");
       }
-    }, [isLoading, booted]);
+    }, [isLoading, booted, isAuth]);
 
     useEffect(() => {
       const boot = async () => {
