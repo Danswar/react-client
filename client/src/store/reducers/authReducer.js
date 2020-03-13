@@ -1,6 +1,7 @@
 import {
   AUTH_SET_CREDENCIALS,
-  AUTH_SET_ISLOADING
+  AUTH_SET_ISLOADING,
+  AUTH_DELETE_CREDENCIALS
 } from "../actions/authAction";
 
 const initialState = {
@@ -18,6 +19,15 @@ export const authReducer = (state = initialState, action) => {
         isAuth: true,
         token: action.payload.token,
         user: action.payload.user,
+        isLoading: false
+      };
+
+    case AUTH_DELETE_CREDENCIALS:
+      return {
+        ...state,
+        isAuth: false,
+        token: "",
+        user: {},
         isLoading: false
       };
 

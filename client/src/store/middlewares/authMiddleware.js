@@ -11,7 +11,9 @@ import {
   AUTH_SIGNIN_REQUEST,
   AUTH_DECODE_TOKEN,
   AUTH_CHECK,
-  AUTH_SET_CREDENCIALS
+  AUTH_SET_CREDENCIALS,
+  AUTH_LOGOUT_REQUEST,
+  AUTH_DELETE_CREDENCIALS
 } from "../actions/authAction";
 
 import { log } from "../actions/logAction";
@@ -36,6 +38,11 @@ const authMiddleware = ({ dispatch }) => next => async action => {
           log
         )
       );
+      break;
+
+    case AUTH_LOGOUT_REQUEST:
+      localStorage.removeItem("JWT_TOKEN");
+      dispatch({ type: AUTH_DELETE_CREDENCIALS });
       break;
 
     case AUTH_DECODE_TOKEN:

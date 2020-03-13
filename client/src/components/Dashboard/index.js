@@ -1,20 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AUTH_DECODE_TOKEN } from "../../store/actions/authAction";
+import { logoutRequest } from "../../store/actions/authAction";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
 
-  //TODO: sacar esto de aqui-----------------
-  const { token } = useSelector(state => state.auth);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({
-      type: AUTH_DECODE_TOKEN,
-      payload: token
-    });
-  }, [dispatch]);
-  //--------------------------------------------
+  const handleLogout = () => {
+    dispatch(logoutRequest());
+  };
 
   return (
     <div>
@@ -59,6 +53,9 @@ const Dashboard = () => {
           jwt token
         </h3>
         <p>{JSON.stringify(user, null, 2)}</p>
+        <button className="btn btn-outline-danger mt-4" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );
