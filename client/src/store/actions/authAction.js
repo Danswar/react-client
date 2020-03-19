@@ -1,6 +1,7 @@
 // To Middlewares
-export const AUTH_SIGNIN_REQUEST = "[Auth] Singin request";
 export const AUTH_CHECK = "[Auth] Check";
+export const AUTH_SIGNIN_REQUEST = "[Auth] Singin request";
+export const AUTH_SIGNUP_REQUEST = "[Auth] Singup request";
 export const AUTH_LOGOUT_REQUEST = "[Auth] Logout request";
 
 //To reducer
@@ -19,6 +20,11 @@ export const checkAuth = optionalResponse => ({
 export const signinRequest = (email, password) => ({
   type: AUTH_SIGNIN_REQUEST,
   payload: { email, password }
+});
+
+export const signupRequest = (username, email, password) => ({
+  type: AUTH_SIGNIN_REQUEST,
+  payload: { username, email, password }
 });
 
 export const setCredentials = (token, user) => ({

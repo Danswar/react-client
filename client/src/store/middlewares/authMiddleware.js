@@ -9,8 +9,9 @@ import {
   checkAuth
 } from "../actions/authAction";
 import {
-  AUTH_SIGNIN_REQUEST,
   AUTH_CHECK,
+  AUTH_SIGNIN_REQUEST,
+  AUTH_SIGNUP_REQUEST,
   AUTH_SET_CREDENCIALS,
   AUTH_LOGOUT_REQUEST,
   AUTH_DELETE_CREDENCIALS
@@ -30,14 +31,20 @@ const authMiddleware = ({ dispatch }) => next => async action => {
       localStorage.removeItem("JWT_TOKEN");
       break;
 
-    case AUTH_SIGNIN_REQUEST:
+    case (AUTH_SIGNUP_REQUEST, AUTH_SIGNIN_REQUEST):
+      let url =
+        action.type === AUTH_SIGNUP_REQUEST
+          ? `${API_URL}/signup`
+          : `${API_URL}/signin`;
+
       let params = {
         body: action.payload,
         method: "POST",
-        url: `${API_URL}/signin`,
+        url,
         onSuccess: checkAuth,
         onError: log
       };
+
       dispatch(apiRequest(params));
       break;
 
