@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { signinRequest } from "../../store/actions/authAction";
-import withCheckAuth from "../HOCs/withCheckAuth";
 
 import SigninForm from "./signinForm";
+import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -22,4 +22,4 @@ const Signin = () => {
   );
 };
 
-export default withCheckAuth(Signin);
+export default withRedirectAuthUsers(Signin);

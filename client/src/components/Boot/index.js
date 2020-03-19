@@ -1,5 +1,5 @@
 import React from "react";
-import withCheckAuth from "../HOCs/withCheckAuth";
+import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";
 
 const Boot = () => {
   return (
@@ -21,4 +21,4 @@ const Boot = () => {
   );
 };
 
-export default withCheckAuth(Boot);
+export default withRedirectAuthUsers(Boot, "/signin");
