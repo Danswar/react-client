@@ -2,12 +2,7 @@ import JWT from "jsonwebtoken";
 import { API_URL } from "../constants";
 import { apiRequest } from "../actions/apiAction";
 
-import {
-  decodeToken,
-  setCredentials,
-  authLoading,
-  checkAuth
-} from "../actions/authAction";
+import { setCredentials, authLoading, checkAuth } from "../actions/authAction";
 import {
   AUTH_CHECK,
   AUTH_SIGNIN_REQUEST,
@@ -31,7 +26,8 @@ const authMiddleware = ({ dispatch }) => next => async action => {
       localStorage.removeItem("JWT_TOKEN");
       break;
 
-    case (AUTH_SIGNUP_REQUEST, AUTH_SIGNIN_REQUEST):
+    case AUTH_SIGNUP_REQUEST:
+    case AUTH_SIGNIN_REQUEST:
       let url =
         action.type === AUTH_SIGNUP_REQUEST
           ? `${API_URL}/signup`

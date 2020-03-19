@@ -1,9 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { signupRequest } from "../../store/actions/authAction";
+import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";
 import SignupForm from "./SignupForm";
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const onSubmit = (username, email, password) => {
-    console.log(username, email, password);
+    dispatch(signupRequest(username, email, password));
   };
 
   return (
@@ -16,4 +20,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default withRedirectAuthUsers(Signup);

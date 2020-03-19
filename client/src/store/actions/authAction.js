@@ -23,7 +23,7 @@ export const signinRequest = (email, password) => ({
 });
 
 export const signupRequest = (username, email, password) => ({
-  type: AUTH_SIGNIN_REQUEST,
+  type: AUTH_SIGNUP_REQUEST,
   payload: { username, email, password }
 });
 

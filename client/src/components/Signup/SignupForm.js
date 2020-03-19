@@ -1,21 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./signinStyle.css";
+import "./signupStyle.css";
 
-const SigninForm = ({ imgSrc, onSubmit }) => {
+const SignupForm = ({ imgSrc, onSubmit }) => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(email, password);
+    onSubmit(username, email, password);
   };
-
   return (
     <div className="body text-center">
-      <form className="form-signin">
+      <form className="form-signup">
         <img className="mb-4" src={imgSrc} alt="" width="72" height="72" />
-        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 className="h3 mb-3 font-weight-normal">Please sign up</h1>
+        <label htmlFor="inputUsername" className="sr-only">
+          Name
+        </label>
+        <input
+          type="text"
+          id="inputUsername"
+          className="form-control"
+          placeholder="Full name"
+          autoFocus
+          onChange={e => setUsername(e.target.value)}
+          required
+        />
         <label htmlFor="inputEmail" className="sr-only">
           Email address
         </label>
@@ -25,7 +36,6 @@ const SigninForm = ({ imgSrc, onSubmit }) => {
           className="form-control"
           placeholder="Email address"
           required
-          autoFocus
           onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="inputPassword" className="sr-only">
@@ -45,13 +55,12 @@ const SigninForm = ({ imgSrc, onSubmit }) => {
           className="btn btn-lg btn-primary btn-block"
           type="submit"
         >
-          Sign in
+          Sign up
         </button>
-        <Link to="/signup">or sign up</Link>
         <p className="mt-5 mb-3 text-muted">&copy; 2020</p>
       </form>
     </div>
   );
 };
 
-export default SigninForm;
+export default SignupForm;
