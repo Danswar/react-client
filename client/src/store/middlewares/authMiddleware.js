@@ -5,11 +5,11 @@ import { apiRequest } from "../actions/apiAction";
 import {
   decodeToken,
   setCredentials,
-  authLoading
+  authLoading,
+  checkAuth
 } from "../actions/authAction";
 import {
   AUTH_SIGNIN_REQUEST,
-  AUTH_DECODE_TOKEN,
   AUTH_CHECK,
   AUTH_SET_CREDENCIALS,
   AUTH_LOGOUT_REQUEST,
@@ -23,37 +23,33 @@ const authMiddleware = ({ dispatch }) => next => async action => {
 
   switch (action.type) {
     case AUTH_SET_CREDENCIALS:
-      if (action.payload.token.length !== 0) {
-        localStorage.setItem("JWT_TOKEN", action.payload.token);
-      }
+      localStorage.setItem("JWT_TOKEN", action.payload.token);
+      break;
+
+    case AUTH_DELETE_CREDENCIALS:
+      localStorage.removeItem("JWT_TOKEN");
       break;
 
     case AUTH_SIGNIN_REQUEST:
-      dispatch(
-        apiRequest(
-          action.payload,
-          "POST",
-          `${API_URL}/signin`,
-          decodeToken,
-          log
-        )
-      );
+      let params = {
+        body: action.payload,
+        method: "POST",
+        url: `${API_URL}/signin`,
+        onSuccess: checkAuth,
+        onError: log
+      };
+      dispatch(apiRequest(params));
       break;
 
     case AUTH_LOGOUT_REQUEST:
-      localStorage.removeItem("JWT_TOKEN");
+      //TODO: Make a logout request to server
       dispatch({ type: AUTH_DELETE_CREDENCIALS });
       break;
 
-    case AUTH_DECODE_TOKEN:
-      const user = await JWT.decode(action.payload);
-      dispatch(setCredentials(action.payload, user));
-      break;
-
     case AUTH_CHECK:
-      const token = localStorage.getItem("JWT_TOKEN")
-        ? localStorage.getItem("JWT_TOKEN")
-        : null;
+      const token = action.payload
+        ? action.payload.data.token
+        : localStorage.getItem("JWT_TOKEN");
 
       if (token) {
         const user = await JWT.decode(token);
