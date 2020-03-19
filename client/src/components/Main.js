@@ -1,12 +1,13 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
+import Signin from "./AuthComponent/Signin";
+import Signup from "./AuthComponent/Signup";
+import ProtectedRoute from "./AuthComponent/HOCs/ProtectedRoute";
+
 import Boot from "./Boot";
-import Signin from "./Signin";
 import Dashboard from "./Dashboard";
 import NoMatch from "./NoMatch";
-import ProtectedRoute from "./HOCs/ProtectedRoute";
-import Signup from "./Signup";
 
 function Main() {
   return (

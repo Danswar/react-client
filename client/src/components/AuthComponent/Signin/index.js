@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { signinRequest } from "../../store/actions/authAction";
+import { signinRequest } from "../../../store/actions/authAction";
 
 import SigninForm from "./signinForm";
 import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";

@@ -3,6 +3,7 @@
 - limpieza de codigo duplicado en auth middleware
 - completado el flujo para registrar usuarios
 - cambiado HOC withCheckAuth por withRedirectAuthUsers
+- refactor de AuthComponents
 
 13/03/2020 -------------------
 (CLIENT)

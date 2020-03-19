@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { checkAuth, authLoading } from "../../store/actions/authAction";
+import { checkAuth, authLoading } from "../../../store/actions/authAction";
 
 const withRedirectAuthUsers = (WrappedComponent, redirectGuessesTo = "") => {
   return () => {

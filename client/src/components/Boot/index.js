@@ -1,5 +1,5 @@
 import React from "react";
-import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";
+import withRedirectAuthUsers from "../AuthComponent/HOCs/withRedirectAuthUsers";
 
 const Boot = () => {
   return (
