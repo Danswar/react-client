@@ -1,13 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
+import SignupForm from "./SignupForm";
 
-class Signup extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello from Signup Component</h1>
-      </div>
-    );
-  }
-}
+const Signup = () => {
+  const onSubmit = (username, email, password) => {
+    console.log(username, email, password);
+  };
+
+  return (
+    <div>
+      <SignupForm
+        onSubmit={onSubmit}
+        imgSrc="https://via.placeholder.com/330"
+      />
+    </div>
+  );
+};
 
 export default Signup;

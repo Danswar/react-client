@@ -6,6 +6,7 @@ import Signin from "./Signin";
 import Dashboard from "./Dashboard";
 import NoMatch from "./NoMatch";
 import ProtectedRoute from "./HOCs/ProtectedRoute";
+import Signup from "./Signup";
 
 function Main() {
   return (
@@ -14,6 +15,7 @@ function Main() {
         {/* Public routes */}
         <Route path="/" exact={true} component={Boot} />
         <Route path="/signin" exact={true} component={Signin} />
+        <Route path="/signup" exact={true} component={Signup} />
 
         {/* Private routes */}
         <ProtectedRoute path="/dashboard" exact={true} component={Dashboard} />
