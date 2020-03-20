@@ -1,4 +1,8 @@
 19/03/2020 -------------------
+(CLIENT)(SERVER)
+- revision de funcionalidad de autenticacion de usuario
+
+19/03/2020 -------------------
 (CLIENT)
 - limpieza de codigo duplicado en auth middleware
 - completado el flujo para registrar usuarios

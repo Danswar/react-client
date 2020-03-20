@@ -16,7 +16,7 @@ const apiMiddleware = ({ dispatch }) => next => action => {
       data: JSON.stringify(body)
     })
       .then(data => dispatchAll(dispatch, onSuccess, data))
-      .catch(error => dispatchAll(dispatchAll, onError, error));
+      .catch(error => dispatchAll(dispatch, onError, error.response));
   }
 };
 

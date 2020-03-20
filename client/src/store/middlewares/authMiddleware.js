@@ -33,15 +33,15 @@ const authMiddleware = ({ dispatch }) => next => async action => {
           ? `${API_URL}/signup`
           : `${API_URL}/signin`;
 
-      let params = {
-        body: action.payload,
-        method: "POST",
-        url,
-        onSuccess: checkAuth,
-        onError: log
-      };
-
-      dispatch(apiRequest(params));
+      dispatch(
+        apiRequest({
+          body: action.payload,
+          method: "POST",
+          url,
+          onSuccess: checkAuth,
+          onError: log
+        })
+      );
       break;
 
     case AUTH_LOGOUT_REQUEST:
@@ -54,10 +54,11 @@ const authMiddleware = ({ dispatch }) => next => async action => {
         ? action.payload.data.token
         : localStorage.getItem("JWT_TOKEN");
 
-      if (token) {
-        const user = await JWT.decode(token);
-        dispatch(setCredentials(token, user));
-      }
+      const user = await checkToken(token);
+      user
+        ? dispatch(setCredentials(token, user))
+        : dispatch({ type: AUTH_DELETE_CREDENCIALS });
+
       dispatch(authLoading(false));
       break;
 
@@ -67,3 +68,23 @@ const authMiddleware = ({ dispatch }) => next => async action => {
 };
 
 export default authMiddleware;
+
+//--
+//--
+// Helpers
+const checkToken = async token => {
+  try {
+    if (!token || !token.length) return false;
+
+    let user = await JWT.decode(token);
+
+    let { exp } = user;
+    let now = Date.now() / 1000;
+    if (exp < now) return false;
+
+    return user;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
