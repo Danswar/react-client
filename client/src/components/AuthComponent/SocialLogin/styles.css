@@ -1,0 +1,10 @@
+.social-sign-button {
+  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.social-sign-button span {
+  font-weight: 700 !important;
+  font-size: 18px;
+}

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Children } from "react";
 import { Link } from "react-router-dom";
 import "./signinStyle.css";
 import { clearError } from "../../../store/actions/errorActions";
 
-const SigninForm = ({ imgSrc, onSubmit, errorMsg, cleanError }) => {
+const SigninForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -55,6 +55,7 @@ const SigninForm = ({ imgSrc, onSubmit, errorMsg, cleanError }) => {
         >
           Sign in
         </button>
+        {children}
         <Link to="/signup">or sign up</Link>
         <p className="mt-5 mb-3 text-muted">&copy; 2020</p>
       </form>

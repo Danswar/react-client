@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { signinRequest } from "../../../store/actions/authAction";
 import { clearError } from "../../../store/actions/errorActions";
 
+import SocialLogin from "../SocialLogin";
 import SigninForm from "./signinForm";
 import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";
 
@@ -33,7 +34,10 @@ const Signin = () => {
         errorMsg={errorMsg}
         cleanError={cleanError}
         imgSrc="https://via.placeholder.com/330"
-      />
+      >
+        <SocialLogin />
+      </SigninForm>
+      >
     </div>
   );
 };

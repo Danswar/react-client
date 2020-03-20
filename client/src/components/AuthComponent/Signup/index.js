@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearError } from "../../../store/actions/errorActions";
 import { signupRequest } from "../../../store/actions/authAction";
+import SocialLogin from "../SocialLogin";
 import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";
 import SignupForm from "./SignupForm";
 
@@ -31,7 +32,9 @@ const Signup = () => {
         errorMsg={errorMsg}
         cleanError={cleanError}
         imgSrc="https://via.placeholder.com/330"
-      />
+      >
+        <SocialLogin />
+      </SignupForm>
     </div>
   );
 };

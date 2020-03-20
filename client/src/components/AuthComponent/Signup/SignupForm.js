@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./signupStyle.css";
 
-const SignupForm = ({ imgSrc, onSubmit, errorMsg }) => {
+const SignupForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,6 +66,8 @@ const SignupForm = ({ imgSrc, onSubmit, errorMsg }) => {
         >
           Sign up
         </button>
+        {children}
+        <Link to="/signin">...or sign in!</Link>
         <p className="mt-5 mb-3 text-muted">&copy; 2020</p>
       </form>
     </div>
