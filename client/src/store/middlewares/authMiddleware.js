@@ -39,7 +39,7 @@ const authMiddleware = ({ dispatch }) => next => async action => {
           method: "POST",
           url,
           onSuccess: checkAuth,
-          onError: log
+          onError: { type: AUTH_DELETE_CREDENCIALS }
         })
       );
       break;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./signupStyle.css";
 
-const SignupForm = ({ imgSrc, onSubmit }) => {
+const SignupForm = ({ imgSrc, onSubmit, errorMsg }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,9 +10,17 @@ const SignupForm = ({ imgSrc, onSubmit }) => {
     e.preventDefault();
     onSubmit(username, email, password);
   };
+
   return (
     <div className="body text-center">
       <form className="form-signup">
+        {errorMsg ? (
+          <div class="alert alert-danger" role="alert">
+            {errorMsg}
+          </div>
+        ) : (
+          ""
+        )}
         <img className="mb-4" src={imgSrc} alt="" width="72" height="72" />
         <h1 className="h3 mb-3 font-weight-normal">Please sign up</h1>
         <label htmlFor="inputUsername" className="sr-only">

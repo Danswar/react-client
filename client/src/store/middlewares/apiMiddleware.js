@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { API_REQUEST } from "../actions/apiAction";
+import { setError } from "../actions/errorActions";
 
 const apiMiddleware = ({ dispatch }) => next => action => {
   next(action);
@@ -16,7 +17,11 @@ const apiMiddleware = ({ dispatch }) => next => action => {
       data: JSON.stringify(body)
     })
       .then(data => dispatchAll(dispatch, onSuccess, data))
-      .catch(error => dispatchAll(dispatch, onError, error.response));
+      .catch(error => {
+        let { response } = error;
+        dispatch(setError(response.status, response.data.msg));
+        dispatchAll(dispatch, onError, response);
+      });
   }
 };
 

@@ -1,6 +1,7 @@
 19/03/2020 -------------------
 (CLIENT)(SERVER)
 - revision de funcionalidad de autenticacion de usuario
+- error reducer implementado
 
 19/03/2020 -------------------
 (CLIENT)

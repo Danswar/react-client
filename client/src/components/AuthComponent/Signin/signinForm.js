@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./signinStyle.css";
+import { clearError } from "../../../store/actions/errorActions";
 
-const SigninForm = ({ imgSrc, onSubmit }) => {
+const SigninForm = ({ imgSrc, onSubmit, errorMsg, cleanError }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,9 +12,16 @@ const SigninForm = ({ imgSrc, onSubmit }) => {
     onSubmit(email, password);
   };
 
+  const renderErrorMsg = (
+    <div class="alert alert-danger" role="alert">
+      {errorMsg}
+    </div>
+  );
+
   return (
     <div className="body text-center">
       <form className="form-signin">
+        {errorMsg ? renderErrorMsg : ""}
         <img className="mb-4" src={imgSrc} alt="" width="72" height="72" />
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label htmlFor="inputEmail" className="sr-only">
