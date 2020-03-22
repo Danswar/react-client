@@ -1,3 +1,7 @@
+22/03/2020 -------------------
+(CLIENT)(SERVER)
+- implementada ruta para autenticar usuarios con id_token de google
+
 19/03/2020 -------------------
 (CLIENT)(SERVER)
 - revision de funcionalidad de autenticacion de usuario

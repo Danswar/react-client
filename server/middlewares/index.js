@@ -14,5 +14,6 @@ const localMiddleware = (module.exports = {
   //--
   //Auth middlewares
   authJWT: passportStrategy("jwt"),
-  authLocal: passportStrategy("local")
+  authLocal: passportStrategy("local"),
+  authGoogle: passportStrategy("google-id-token")
 });

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 
-const { authLocal, authJWT } = require("../middlewares");
+const { authLocal, authJWT, authGoogle } = require("../middlewares");
 const signToken = require("../config/signToken");
 
 const User = require("../models/user");
@@ -45,6 +45,17 @@ router.post("/signup", async (req, res) => {
  * @access  Public
  */
 router.post("/signin", authLocal, async (req, res) => {
+  const token = await signToken(req.user);
+
+  res.status(200).json({ token });
+});
+
+/**
+ * @route   POST auth/google
+ * @desc    authenticate user by google id_token
+ * @access  Private
+ */
+router.post("/auth/google", authGoogle, async (req, res) => {
   const token = await signToken(req.user);
 
   res.status(200).json({ token });
