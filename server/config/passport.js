@@ -5,7 +5,7 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
-const { JWT_SECRET } = require("../config/keys");
+const { JWT_SECRET, GOOGLE_CLIENT_ID } = require("../config/keys");
 
 module.exports = passport => {
   //
@@ -14,12 +14,27 @@ module.exports = passport => {
   passport.use(
     new GoogleTokenStrategy(
       {
-        clientID:
-          "793803522960-0hfd8cdck546t2551tps58k6jjdh0q7h.apps.googleusercontent.com"
+        clientID: GOOGLE_CLIENT_ID
       },
       async (parsedToken, googleId, done) => {
-        let { email } = parsedToken.payload;
-        let user = await User.find({ email });
+        let { email, name, picture } = parsedToken.payload;
+        let user = await User.findOne({ email });
+
+        if (!user)
+          user = await new User({
+            email,
+            username: name,
+            googleId,
+            picture
+          }).save();
+
+        //first time user use google sign-in?
+        if (!user.googleId) {
+          user.googleId = googleId;
+          !user.picture ? (user.picture = picture) : null;
+          await user.save();
+        }
+
         done(null, user);
       }
     )

@@ -10,10 +10,10 @@ const passportStrategy = nameStrategy => {
     })(req, res, next);
 };
 
-const localMiddleware = (module.exports = {
+module.exports = {
   //--
   //Auth middlewares
   authJWT: passportStrategy("jwt"),
   authLocal: passportStrategy("local"),
   authGoogle: passportStrategy("google-id-token")
-});
+};

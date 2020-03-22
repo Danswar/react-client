@@ -1,5 +1,4 @@
 import JWT from "jsonwebtoken";
-import { API_URL } from "../constants";
 import { apiRequest } from "../actions/apiAction";
 
 import { setCredentials, authLoading, checkAuth } from "../actions/authAction";
@@ -7,12 +6,11 @@ import {
   AUTH_CHECK,
   AUTH_SIGNIN_REQUEST,
   AUTH_SIGNUP_REQUEST,
+  AUTH_GOOGLE_SIGNIN_REQUEST,
   AUTH_SET_CREDENCIALS,
   AUTH_LOGOUT_REQUEST,
   AUTH_DELETE_CREDENCIALS
 } from "../actions/authAction";
-
-import { log } from "../actions/logAction";
 
 const authMiddleware = ({ dispatch }) => next => async action => {
   next(action);
@@ -28,16 +26,12 @@ const authMiddleware = ({ dispatch }) => next => async action => {
 
     case AUTH_SIGNUP_REQUEST:
     case AUTH_SIGNIN_REQUEST:
-      let url =
-        action.type === AUTH_SIGNUP_REQUEST
-          ? `${API_URL}/signup`
-          : `${API_URL}/signin`;
-
+    case AUTH_GOOGLE_SIGNIN_REQUEST:
       dispatch(
         apiRequest({
           body: action.payload,
-          method: "POST",
-          url,
+          method: action.meta.method,
+          url: action.meta.url,
           onSuccess: checkAuth,
           onError: { type: AUTH_DELETE_CREDENCIALS }
         })

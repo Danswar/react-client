@@ -1,7 +1,10 @@
+import { API_URL } from "../constants";
+
 // To Middlewares
 export const AUTH_CHECK = "[Auth] Check";
 export const AUTH_SIGNIN_REQUEST = "[Auth] Singin request";
 export const AUTH_SIGNUP_REQUEST = "[Auth] Singup request";
+export const AUTH_GOOGLE_SIGNIN_REQUEST = "[Auth] Google singin request";
 export const AUTH_LOGOUT_REQUEST = "[Auth] Logout request";
 
 //To reducer
@@ -19,12 +22,29 @@ export const checkAuth = optionalResponse => ({
 
 export const signinRequest = (email, password) => ({
   type: AUTH_SIGNIN_REQUEST,
-  payload: { email, password }
+  payload: { email, password },
+  meta: {
+    method: "POST",
+    url: `${API_URL}/signin`
+  }
 });
 
 export const signupRequest = (username, email, password) => ({
   type: AUTH_SIGNUP_REQUEST,
-  payload: { username, email, password }
+  payload: { username, email, password },
+  meta: {
+    method: "POST",
+    url: `${API_URL}/signup`
+  }
+});
+
+export const googleSigninRequest = id_token => ({
+  type: AUTH_GOOGLE_SIGNIN_REQUEST,
+  payload: { id_token },
+  meta: {
+    method: "POST",
+    url: `${API_URL}/auth/google`
+  }
 });
 
 export const setCredentials = (token, user) => ({
