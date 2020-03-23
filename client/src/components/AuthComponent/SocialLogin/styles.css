@@ -1,5 +1,5 @@
 .social-sign-button {
-  margin: 10px 0;
+  margin: 20px 0 10px 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -7,4 +7,10 @@
 .social-sign-button span {
   font-weight: 700 !important;
   font-size: 18px;
+}
+.kep-login-facebook.metro {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 2px;
 }

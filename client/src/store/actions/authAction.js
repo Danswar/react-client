@@ -5,6 +5,7 @@ export const AUTH_CHECK = "[Auth] Check";
 export const AUTH_SIGNIN_REQUEST = "[Auth] Singin request";
 export const AUTH_SIGNUP_REQUEST = "[Auth] Singup request";
 export const AUTH_GOOGLE_SIGNIN_REQUEST = "[Auth] Google singin request";
+export const AUTH_FACEBOOK_SIGNIN_REQUEST = "[Auth] Facebook singin request";
 export const AUTH_LOGOUT_REQUEST = "[Auth] Logout request";
 
 //To reducer
@@ -44,6 +45,15 @@ export const googleSigninRequest = id_token => ({
   meta: {
     method: "POST",
     url: `${API_URL}/auth/google`
+  }
+});
+
+export const facebookSigninRequest = access_token => ({
+  type: AUTH_FACEBOOK_SIGNIN_REQUEST,
+  payload: { access_token },
+  meta: {
+    method: "POST",
+    url: `${API_URL}/auth/facebook`
   }
 });
 

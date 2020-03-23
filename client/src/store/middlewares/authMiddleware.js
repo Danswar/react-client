@@ -7,6 +7,7 @@ import {
   AUTH_SIGNIN_REQUEST,
   AUTH_SIGNUP_REQUEST,
   AUTH_GOOGLE_SIGNIN_REQUEST,
+  AUTH_FACEBOOK_SIGNIN_REQUEST,
   AUTH_SET_CREDENCIALS,
   AUTH_LOGOUT_REQUEST,
   AUTH_DELETE_CREDENCIALS
@@ -27,6 +28,7 @@ const authMiddleware = ({ dispatch }) => next => async action => {
     case AUTH_SIGNUP_REQUEST:
     case AUTH_SIGNIN_REQUEST:
     case AUTH_GOOGLE_SIGNIN_REQUEST:
+    case AUTH_FACEBOOK_SIGNIN_REQUEST:
       dispatch(
         apiRequest({
           body: action.payload,
