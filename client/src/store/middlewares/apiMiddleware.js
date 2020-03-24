@@ -1,19 +1,22 @@
 import axios from "axios";
-
 import { API_REQUEST } from "../actions/apiAction";
 import { setError } from "../actions/errorActions";
 
-const apiMiddleware = ({ dispatch }) => next => action => {
+const apiMiddleware = ({ dispatch, getState }) => next => action => {
   next(action);
 
   if (action.type === API_REQUEST) {
     const { method, url, onSuccess, onError } = action.payload.meta;
     const body = action.payload.body;
+    const token = getState().auth.token;
 
     axios({
       url,
       method,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ? `JWT ${token}` : ""
+      },
       data: JSON.stringify(body)
     })
       .then(data => dispatchAll(dispatch, onSuccess, data))

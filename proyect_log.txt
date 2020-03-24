@@ -2,6 +2,7 @@
 (CLIENT)
 - limpieza de warnings
 - mejoras en componentes auth
+- peticiones firmadas con token
 
 22/03/2020 -------------------
 (CLIENT)(SERVER)
