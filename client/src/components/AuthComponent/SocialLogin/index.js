@@ -11,7 +11,7 @@ import {
 import { GOOGLE_CLIENT_ID, FACEBOOK_CLIENT_ID } from "../../../keys";
 import "./styles.css";
 
-const SocialLogin = () => {
+const SocialLogin = ({ isLoading }) => {
   const dispacth = useDispatch();
 
   return (
@@ -23,12 +23,14 @@ const SocialLogin = () => {
         onSuccess={res => dispacth(googleSigninRequest(res.tokenId))}
         onFailure={res => console.log(res)}
         cookiePolicy={"single_host_origin"}
+        disabled={isLoading}
       />
       <FacebookLogin
         appId={FACEBOOK_CLIENT_ID}
         fields="name,email,picture"
         onClick={() => console.log("button clicked")}
         callback={res => dispacth(facebookSigninRequest(res.accessToken))}
+        disabled={isLoading}
       />
     </div>
   );

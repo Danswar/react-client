@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./signinStyle.css";
 
-const SigninForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
+const SigninForm = ({ imgSrc, onSubmit, errorMsg, isLoading, children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +22,16 @@ const SigninForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
       <form className="form-signin">
         {errorMsg ? renderErrorMsg : ""}
         <img className="mb-4" src={imgSrc} alt="" width="72" height="72" />
-        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+        {isLoading ? (
+          <div className="mb-3 text-center">
+            <div class="spinner-border text-secondary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+        )}
+
         <label htmlFor="inputEmail" className="sr-only">
           Email address
         </label>
@@ -33,6 +42,7 @@ const SigninForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
           placeholder="Email address"
           required
           autoFocus
+          disabled={isLoading}
           onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="inputPassword" className="sr-only">
@@ -44,6 +54,7 @@ const SigninForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
           className="form-control"
           placeholder="Password"
           onChange={e => setPassword(e.target.value)}
+          disabled={isLoading}
           required
         />
         <div className="checkbox mb-3"></div>
@@ -51,6 +62,7 @@ const SigninForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
           onClick={handleSubmit}
           className="btn btn-lg btn-primary btn-block"
           type="submit"
+          disabled={isLoading}
         >
           Sign in
         </button>

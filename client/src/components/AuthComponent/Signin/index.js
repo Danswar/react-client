@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signinRequest } from "../../../store/actions/authAction";
-import { clearError } from "../../../store/actions/errorActions";
 
 import SocialLogin from "../SocialLogin";
 import SigninForm from "./signinForm";
@@ -9,22 +8,20 @@ import withRedirectAuthUsers from "../HOCs/withRedirectAuthUsers";
 
 const Signin = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(store => store.auth.isLoading);
   const error = useSelector(store => store.error);
 
   const [errorMsg, setErrorMsg] = useState(null);
   useEffect(() => {
-    if (error.code === 401) {
+    if (error.code >= 400 || error.code < 500) {
       setErrorMsg(error.msg);
     }
   }, [error]);
 
-  const cleanError = () => {
-    dispatch(clearError());
-  };
-
   const onSubmit = (email, password) => {
-    dispatch(signinRequest(email, password));
-    dispatch(clearError());
+    email && password
+      ? dispatch(signinRequest(email, password))
+      : setErrorMsg("email and password are needed");
   };
 
   return (
@@ -32,7 +29,7 @@ const Signin = () => {
       <SigninForm
         onSubmit={onSubmit}
         errorMsg={errorMsg}
-        cleanError={cleanError}
+        isLoading={isLoading}
         imgSrc="https://via.placeholder.com/330"
       >
         <SocialLogin />

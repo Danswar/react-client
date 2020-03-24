@@ -12,6 +12,7 @@ import {
   AUTH_LOGOUT_REQUEST,
   AUTH_DELETE_CREDENCIALS
 } from "../actions/authAction";
+import { clearError } from "../actions/errorActions";
 
 const authMiddleware = ({ dispatch }) => next => async action => {
   next(action);
@@ -29,6 +30,8 @@ const authMiddleware = ({ dispatch }) => next => async action => {
     case AUTH_SIGNIN_REQUEST:
     case AUTH_GOOGLE_SIGNIN_REQUEST:
     case AUTH_FACEBOOK_SIGNIN_REQUEST:
+      dispatch(authLoading(true));
+      dispatch(clearError());
       dispatch(
         apiRequest({
           body: action.payload,
