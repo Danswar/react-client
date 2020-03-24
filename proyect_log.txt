@@ -3,6 +3,7 @@
 - implementada ruta para autenticar usuarios con id_token de google
 - refactor al modelo user para aceptar googleID y password no es obligatorio
 - terminada GoogleStrategy
+- terminada login con Facebook
 
 19/03/2020 -------------------
 (CLIENT)(SERVER)

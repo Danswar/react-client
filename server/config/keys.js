@@ -9,5 +9,10 @@ module.exports = {
 
   //ClientId from https://console.developers.google.com/apis/credentials/
   GOOGLE_CLIENT_ID:
-    "793803522960-0hfd8cdck546t2551tps58k6jjdh0q7h.apps.googleusercontent.com"
+    "793803522960-0hfd8cdck546t2551tps58k6jjdh0q7h.apps.googleusercontent.com",
+
+  //Facebook OAuth credentials
+  FACEBOOK_CLIENT_ID: "1315442741985851",
+
+  FACEBOOK_SECRET: "0293051bae26c9c502f61682cc14f473"
 };

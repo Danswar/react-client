@@ -15,5 +15,6 @@ module.exports = {
   //Auth middlewares
   authJWT: passportStrategy("jwt"),
   authLocal: passportStrategy("local"),
-  authGoogle: passportStrategy("google-id-token")
+  authGoogle: passportStrategy("google-id-token"),
+  authFacebook: passportStrategy("facebook-token")
 };

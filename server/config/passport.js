@@ -1,3 +1,4 @@
+const FacebookTokenStrategy = require("passport-facebook-token");
 const GoogleTokenStrategy = require("passport-google-id-token");
 const JwtStrategy = require("passport-jwt").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
@@ -5,9 +6,44 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
-const { JWT_SECRET, GOOGLE_CLIENT_ID } = require("../config/keys");
+const {
+  JWT_SECRET,
+  GOOGLE_CLIENT_ID,
+  FACEBOOK_CLIENT_ID,
+  FACEBOOK_SECRET
+} = require("../config/keys");
 
 module.exports = passport => {
+  //
+  //
+  //-- Estrategia para autenciar con access_token de Facebook
+  passport.use(
+    new FacebookTokenStrategy(
+      {
+        clientID: FACEBOOK_CLIENT_ID,
+        clientSecret: FACEBOOK_SECRET
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        let { email, name, id } = profile._json;
+        let user = await User.findOne({ email });
+
+        if (!user)
+          user = await new User({
+            email,
+            username: name,
+            facebookId: id
+          }).save();
+
+        //first time user use facebook sign-in?
+        if (!user.facebookId) {
+          user.facebookId = id;
+          await user.save();
+        }
+
+        done(null, user);
+      }
+    )
+  );
   //
   //
   //-- Estrategia para autenticar con id_token de Google
