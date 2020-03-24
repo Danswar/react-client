@@ -1,7 +1,6 @@
-import React, { useState, Children } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./signinStyle.css";
-import { clearError } from "../../../store/actions/errorActions";
 
 const SigninForm = ({ imgSrc, onSubmit, errorMsg, children }) => {
   const [email, setEmail] = useState("");

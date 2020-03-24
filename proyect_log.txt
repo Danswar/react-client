@@ -1,3 +1,7 @@
+24/03/2020 -------------------
+(CLIENT)
+- limpieza de warnings
+
 22/03/2020 -------------------
 (CLIENT)(SERVER)
 - implementada ruta para autenticar usuarios con id_token de google

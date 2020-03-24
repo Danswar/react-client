@@ -3,7 +3,11 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { checkAuth, authLoading } from "../../../store/actions/authAction";
 
-const withRedirectAuthUsers = (WrappedComponent, redirectGuessesTo = "") => {
+const withRedirectAuthUsers = (
+  WrappedComponent,
+  redirectGuessesTo = "",
+  redirectUsersTo = "/dashboard"
+) => {
   return () => {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -13,10 +17,10 @@ const withRedirectAuthUsers = (WrappedComponent, redirectGuessesTo = "") => {
 
     useEffect(() => {
       if (!isLoading && booted) {
-        if (isAuth) history.push("/dashboard");
+        if (isAuth) history.push(redirectUsersTo);
         else if (redirectGuessesTo !== "") history.push(redirectGuessesTo);
       }
-    }, [isLoading, booted, isAuth]);
+    }, [isLoading, booted, isAuth, history]);
 
     useEffect(() => {
       const boot = async () => {

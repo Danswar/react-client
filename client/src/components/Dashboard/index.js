@@ -31,7 +31,7 @@ const Dashboard = () => {
           {user.picture ? (
             <img
               src={user.picture}
-              alt="profile picture"
+              alt="profile"
               className="bd-placeholder-img rounded-circle"
               width="140"
               height="140"
